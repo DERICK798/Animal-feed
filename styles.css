@@ -3,13 +3,11 @@ header{
     padding:18px 60px;
     background:greenyellow;
     color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
-color:white;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
 header h2{font-size:28px;font-weight:bold;}
 header nav a{color:white;text-decoration:none;margin-left:25px;font-size:17px;transition:.3s;}
 header nav a:hover{opacity:.7;}
