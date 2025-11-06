@@ -9,6 +9,13 @@ header {
   padding: 20px 8%;
   background: #fff;
 }
+.card {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 8%;
+}
 .logo { font-size: 28px; font-weight: bold; color: #008000; }
 .logo span { color: #60b347; }
 nav a { margin-right: 20px; text-decoration: none; color: #000; }
