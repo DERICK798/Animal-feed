@@ -25,3 +25,20 @@ nav a { margin-right: 20px; text-decoration: none; color: #000; }
 }
 .hero { padding: 60px 8%; }
 footer { background: #008000; color: #fff; text-align: center; padding: 15px; }
+
+nav a:hover{
+  color:green;
+}
+.btn-login{
+  padding:8px 18px;
+  background:#cb0b54;
+  color:white;
+  border-radius:6px;
+  border:none;
+  cursor:pointer;
+}
+.hero {
+  position:relative;
+  height:85vh;
+  background:image("images/Home.png")center/cover no-repeat;
+}
