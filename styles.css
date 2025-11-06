@@ -56,6 +56,6 @@ padding:18px;
 text-align:center;
 }
 body{
-    background-image:images/ben-moreland-auijD19Byq8-unsplash.jpg";
+    background-image: url("images/ben-moreland-auijD19Byq8-unsplash.jpg");
     background-size: cover;
 }
