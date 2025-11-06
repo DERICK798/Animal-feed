@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Poppins, sans-serif;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 8%;
+  background: #fff;
+}
+.logo { font-size: 28px; font-weight: bold; color: #008000; }
+.logo span { color: #60b347; }
+nav a { margin-right: 20px; text-decoration: none; color: #000; }
+.btn-login, .btn-shop {
+  background: #60b347; color: #fff; border-radius: 6px; padding: 10px 20px;
+  border: none; cursor: pointer;
+}
+.hero { padding: 60px 8%; }
+footer { background: #008000; color: #fff; text-align: center; padding: 15px; }
