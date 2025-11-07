@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Products | AgroGrow</title>
-  <link rel="stylesheet" href="style.css"> <!-- adjust if needed -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -24,6 +24,7 @@
   <p>Find high-quality farm inputs at affordable prices.</p>
 </section>
 
+
 <!-- ✅ FILTER + SEARCH -->
 <div class="product-filter">
   <select id="categoryFilter">
@@ -37,43 +38,44 @@
   <input type="text" id="searchInput" placeholder="Search product...">
 </div>
 
-<h2>Animal feeds/chakula cha wanyama</h2>
-<div class="product-container">
-  <div class="product-card">
-    <img src="https://www.menengaiafyafeeds.co.ke/wp-content/uploads/2016/08/DM-ecomomy70.jpg">
-<h3> Daily Meal 70kg</h3>
-<price>@2,000ksh</price>
-</div>
 
+<!-- ✅ GRID STARTS HERE -->
+<h2 class="category-title">Animal Feeds / Chakula cha Wanyama</h2>
 <div class="product-container">
-  <div class="product-card">
-    <img src="">
-<h3>chicken mash 50kg</h3>
-<p>@1,200ksh</p>
-</div>
 
-<div class="product-container">
-  <div class="product-card">
-    <img src="">
-<h3>cattle cubes 50kg</h3>
-<p>@3,500ksh</p>
-</div>
+  <div class="product-card" data-category="feeds">
+    <img src="https://www.menengaiafyafeeds.co.ke/wp-content/uploads/2016/08/DM-ecomomy70.jpg" alt="Daily Meal">
+    <h3>Daily Meal 70kg</h3>
+    <p class="price">@2,000 ksh</p>
+  </div>
 
-<div class="product-container">
-  <div class="product-card">
-    <img src="">
-<h3>fish feed 25kg</h3>
-<p>@1,500ksh</p>
-</div>
+  <div class="product-card" data-category="feeds">
+    <img src="" alt="Chicken Mash 50kg">
+    <h3>Chicken Mash 50kg</h3>
+    <p class="price">@1,200 ksh</p>
+  </div>
 
-<div class="product-container">
-  <div class="product-card">
-    <img src="">
-<h3>goat pellets 50kg</h3>
-<p>@2,800ksh</p>
-</div>
+  <div class="product-card" data-category="feeds">
+    <img src="" alt="Cattle Cubes 50kg">
+    <h3>Cattle Cubes 50kg</h3>
+    <p class="price">@3,500 ksh</p>
+  </div>
 
-<h2>Vet Medicines/dawa za wanyama</h2>
+  <div class="product-card" data-category="feeds">
+    <img src="" alt="Fish Feed">
+    <h3>Fish Feed 25kg</h3>
+    <p class="price">@1,500 ksh</p>
+  </div>
+
+  <div class="product-card" data-category="feeds">
+    <img src="" alt="Goat Pellets">
+    <h3>Goat Pellets 50kg</h3>
+    <p class="price">@2,800 ksh</p>
+  </div>
+
+</div> <!-- end container -->
+
+<h2 class="category-title">Vet Medicines / Dawa za Wanyama</h2>
 
 <script src="java.js"></script>
 </body>
