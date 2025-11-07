@@ -82,7 +82,7 @@ nav .active {
 .product-card {
   background: rgb(91, 211, 12);
   padding: 15px;
-  border-radius: 12px;
+  border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   transition: transform .2s;
 }
@@ -108,4 +108,11 @@ nav .active {
 h2 {
   font-size: 28px;
   text-align: center;
+}
+h1 {
+  font-size: 36px;
+  text-align: center;
+  margin-top: 20px;
+  color:blue;
+  font-style: unset;
 }
