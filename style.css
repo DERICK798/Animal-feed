@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f7f7f7;
+  background-image: url(https://th.bing.com/th/id/OIP.D2xvmmpVUtOvOmc6iMjp2QHaEI?w=301&h=180&c=7&r=0&o=7&pid=1.7&rm=3);
 }
 
 /* HEADER */
@@ -81,7 +81,7 @@ nav .active {
 
 .product-card {
   background: rgb(91, 211, 12);
-  padding: 1opx;
+  padding: 15px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   transition: transform .2s;
@@ -103,7 +103,7 @@ nav .active {
 
 .price {
   font-weight: bold;
-  color: #09e2e6;
+  color: #191b1c;
 }
 h2 {
   font-size: 28px;
