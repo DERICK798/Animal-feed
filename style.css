@@ -27,7 +27,7 @@ header .logo span {
 .category-title {
   font-size: 28px;
   margin-bottom: 20px;
-  border-left: 5px solid #28a745;
+  border-left: 5px solid #1ea81e;
   padding-left: 10px;
 }
 
@@ -87,21 +87,37 @@ nav .active {
 }
 
 .product-card {
-  background: rgb(91, 211, 12);
+  background: rgb(199, 222, 184);
   padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(21, 60, 149, 0.1);
   transition: transform .2s;
+}
+
+.product-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  width: 90%;
+  margin: 40px auto;
 }
 
 .product-card:hover {
   transform: scale(1.05);
 }
 
-.product-card img {
-  width: 100%;
+/* Image container styles */
+.image-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.image-container img {
+  width: 50%;
   height: 120px;
   object-fit: cover;
+  border-radius: 5px;
 }
 
 .product-card h3 {
