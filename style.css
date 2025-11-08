@@ -24,6 +24,13 @@ header .logo span {
   color: #ffdd57;
 }
 
+.category-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  border-left: 5px solid #28a745;
+  padding-left: 10px;
+}
+
 nav a {
   color: white;
   text-decoration: none;
