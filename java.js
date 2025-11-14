@@ -30,7 +30,7 @@ buttons.forEach(button => {
     updateCartCount();
 
     // Notify user
-    alert(`${name} imeongezwa kwenye cart!`);
+    alert(`${name} order placed!`);
   });
 });
 
@@ -101,13 +101,24 @@ if (document.getElementById('cart-items')) {
             alert("Cart yako iko empty!");
             return;
         }
+    // Disable button to prevent double-clicks while processing
+    checkoutBtn.disabled = true;
+    const prevText = checkoutBtn.textContent;
+    checkoutBtn.textContent = 'Processing...';
 
-        alert("Checkout successful!");
+    // Simulate processing delay, then clear cart and refresh page so cart shows the new empty state
+    setTimeout(() => {
+      // In a real app you'd call your backend here. For now we clear local cart immediately.
+      cart = [];
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
 
-        // Optional: Clear cart after checkout
-        // cart = [];
-        // localStorage.setItem('cart', JSON.stringify(cart));
-        // updateCartCount();
-        // window.location.reload();
+      // Notify user and reload so the cart page updates to the new empty state
+      alert('Checkout successful! Your cart has been cleared.');
+      // Restore button (in case reload is blocked) and then reload page
+      checkoutBtn.disabled = false;
+      checkoutBtn.textContent = prevText;
+      window.location.reload();
+    }, 600);
     });
 }
