@@ -1,50 +1,57 @@
-// sample product data (later tutaleta kutoka DB)
-const products = [
-  { name: "Daily Meal 70kg", category: "Animal feed", price: 3500, img: "images/feed1.jpg" },
-  { name: "Dairy Meal 50kg", category: "feeds", price: 2800, img: "images/feed2.jpg" },
-  { name: "Poultry Mash", category: "feeds", price: 1800, img: "images/chickenfeed.jpg" },
-  { name: "Vet Dewormer", category: "medicine", price: 700, img: "images/dewormer.jpg" },
-  { name: "Insecticide Bottle", category: "pesticides", price: 500, img: "images/pesticide.jpg" },
-  { name: "Farm Cutter Tool", category: "tools", price: 1200, img: "images/tools.jpg" }
-];
+// Load cart from localStorage
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-const productContainer = document.getElementById("productContainer");
-const searchInput = document.getElementById("searchInput");
-const categoryFilter = document.getElementById("categoryFilter");
+// Update cart count in header
+function updateCartCount() {
+  const cartCountEl = document.getElementById('cart-count');
+  if (cartCountEl) {
+    cartCountEl.textContent = cart.length;
+  }
+}
+updateCartCount();
 
-// ✅ populate category dropdown dynamically
-let categories = [...new Set(products.map(product => product.category))];
-categories.forEach(category => {
-  let option = document.createElement("option");
-  option.value = category;
-  option.textContent = category.charAt(0).toUpperCase() + category.slice(1);
-  categoryFilter.appendChild(option);
+// Add event listeners to all Add to Cart buttons
+const buttons = document.querySelectorAll('.btn-shop');
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    const name = button.getAttribute('data-name');
+    const price = parseFloat(button.getAttribute('data-price'));
+
+    // Add product to cart
+    cart.push({ name, price });
+
+    // Save to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Update cart count
+    updateCartCount();
+
+    // Notify user
+    alert(`${name} imeongezwa kwenye cart!`);
+  });
 });
 
-function renderProducts() {
-  productContainer.innerHTML = "";
+// Optional: Add category filter
+const categoryFilter = document.getElementById('categoryFilter');
+const searchInput = document.getElementById('searchInput');
+const products = document.querySelectorAll('.product-card');
 
-  const searchValue = searchInput.value.toLowerCase();
-  const selectedCategory = categoryFilter.value;
+function filterProducts() {
+  const category = categoryFilter.value;
+  const search = searchInput.value.toLowerCase();
 
-  products
-    .filter(product =>
-      (selectedCategory === "all" || product.category === selectedCategory) &&
-      product.name.toLowerCase().includes(searchValue)
-    )
-    .forEach(product => {
-      let card = `
-        <div class="product-card">
-          <img src="${product.img}">
-          <h3>${product.name}</h3>
-          <p class="price">KES ${product.price}</p>
-        </div>
-      `;
-      productContainer.innerHTML += card;
-    });
+  products.forEach(product => {
+    const prodCategory = product.getAttribute('data-category').toLowerCase();
+    const prodName = product.querySelector('h3').textContent.toLowerCase();
+
+    if ((category === 'all' || prodCategory.includes(category)) && prodName.includes(search)) {
+      product.style.display = 'block';
+    } else {
+      product.style.display = 'none';
+    }
+  });
 }
 
-searchInput.addEventListener("input", renderProducts);
-categoryFilter.addEventListener("change", renderProducts);
-
-renderProducts(); // initial load
+categoryFilter.addEventListener('change', filterProducts);
+searchInput.addEventListener('keyup', filterProducts);
