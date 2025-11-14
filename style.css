@@ -137,7 +137,7 @@ h1 {
   font-size: 50px;
   text-align: center;
   margin-top: 20px;
-  color:blue;
+  color:rgb(15, 213, 101);
 }
 footer {
   text-align: center;
@@ -146,3 +146,17 @@ footer {
   color: #fff;
   margin-top: 20px;
 }
+
+p{
+  font-display:inherit;
+  color:tomato;
+
+}
+ul{
+  color:white;
+}
+
+.btn-shop{
+  color:#c61423;
+}
+
