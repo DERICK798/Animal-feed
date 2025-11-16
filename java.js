@@ -95,31 +95,14 @@ if (document.getElementById('cart-items')) {
     // Set total price
     totalPriceEl.textContent = total;
 
-    // Checkout action
+    // Checkout action - redirect to checkout form
     checkoutBtn.addEventListener('click', () => {
         if (cart.length === 0) {
             alert("Cart yako iko empty!");
             return;
         }
-    // Disable button to prevent double-clicks while processing
-    checkoutBtn.disabled = true;
-    const prevText = checkoutBtn.textContent;
-    checkoutBtn.textContent = 'Processing...';
-
-    // Simulate processing delay, then clear cart and refresh page so cart shows the new empty state
-    setTimeout(() => {
-      // In a real app you'd call your backend here. For now we clear local cart immediately.
-      cart = [];
-      localStorage.setItem('cart', JSON.stringify(cart));
-      updateCartCount();
-
-      // Notify user and reload so the cart page updates to the new empty state
-      alert('Checkout successful! Your cart has been cleared.');
-      // Restore button (in case reload is blocked) and then reload page
-      checkoutBtn.disabled = false;
-      checkoutBtn.textContent = prevText;
-      window.location.reload();
-    }, 600);
+        // Redirect user to checkout page to enter delivery details
+        window.location.href = "checkout.html";
     });
 
     function goToCheckout() {
