@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>checkout.html| AgroGrow</title>
+  <link rel="stylesheet" href="style.css">
+  </head>
+<body>
+    <header>
+ <div class="logo">Agro<span>Grow</span></div>
+  <nav>
+    <a href="checkout" class="active">user Details</a>
+    <a href="products.html">Products</a>
+    <a href="cart.html">my order</a>
+  </nav>
+    </header>
+
+     <div class="checkout-container">
+        <h2>Enter Delivery Details</h2>
+
+<form id="checkout-form">
+
+    <label>phone number</label>
+    <input type="text" id="phone" required>
+
+    <label>Delivery Location</label>
+    <input type="text" id="location" place holder="Nairobi,chuka Embu,meru" required>
+
+    <label>Payment Method</label>
+    <select id="payment" required>
+        <option value="">select payment</option>
+        <option value="mpesa">Mpesa</option>
+        <option value="cash on delivery">Cash on Delivery</option>
+    </select>
+
+    <button type="submit" class="place-order-btn">Place Order</button>
+</form>
+</div>
+<script src="checkout.js"></script>
+    </body>
+</html>

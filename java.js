@@ -121,4 +121,9 @@ if (document.getElementById('cart-items')) {
       window.location.reload();
     }, 600);
     });
+
+    function goToCheckout() {
+    window.location.href = "checkout.html";
+}
+
 }
