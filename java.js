@@ -12,13 +12,26 @@ function updateCartCount() {
 // Update cart count on page load
 updateCartCount();
 
-// Add event listeners to all Add to Cart buttons
-const buttons = document.querySelectorAll('.btn-shop');
+// Add event listeners only to Add-to-Cart buttons that include product data
+// This prevents binding to decorative buttons that don't supply product attributes
+const buttons = document.querySelectorAll('.btn-shop[data-name][data-price]');
 
 buttons.forEach(button => {
   button.addEventListener('click', () => {
     const name = button.getAttribute('data-name');
-    const price = parseFloat(button.getAttribute('data-price'));
+    const priceAttr = button.getAttribute('data-price');
+
+    // Defensive checks: ensure attributes exist and price is a valid number
+    if (!name || priceAttr === null) {
+      console.warn('Add-to-cart button missing data-name or data-price:', button);
+      return; // ignore this button
+    }
+
+    const price = parseFloat(priceAttr);
+    if (Number.isNaN(price)) {
+      console.warn('Invalid data-price on Add-to-cart button:', priceAttr, button);
+      return;
+    }
 
     // Add product to cart
     cart.push({ name, price });
@@ -30,7 +43,7 @@ buttons.forEach(button => {
     updateCartCount();
 
     // Notify user
-    alert(`${name} order placed!`);
+    alert(`${name} added to cart!`);
   });
 });
 
