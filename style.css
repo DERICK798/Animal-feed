@@ -346,11 +346,18 @@ ul{
 
 /* RATING STARS */
 .rating span {
-  font-size: 30px;
+  font-size: 22px;
   color: #ccc;
   cursor: pointer;
+  transition: color 0.2s;
 }
+
 .rating span:hover,
 .rating span:hover ~ span {
-  color: #f4b400;
+  color: gold;
 }
+
+.rating span.active {
+  color: gold;
+}
+
