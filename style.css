@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-image: url(https://actualidadganadera.com/wp-content/uploads/2021/05/agrovet-market-logo.jpg);
+  background-image: url(https://tse4.mm.bing.net/th/id/OIP.YsYv8007wAJ6vdUbcWQDawHaEo?rs=1&pid=ImgDetMain&o=7&rm=320);
 }
 
 /* HEADER */
@@ -25,10 +25,33 @@ header .logo span {
 }
 
 .category-title {
+  font-weight: bold;
+  color:deeppink;
   font-size: 28px;
   margin-bottom: 20px;
   border-left: 5px solid #1ea81e;
   padding-left: 10px;
+  display: inline-block; /* allow transform animations */
+  /* page-load bounce (runs once) */
+  animation: bounce-in 900ms cubic-bezier(.22,.8,.25,1) 1;
+}
+
+/* repeat bounce on hover */
+.category-title:hover {
+  animation: bounce 800ms ease-in-out infinite;
+  cursor: pointer;
+}
+
+/* bounce keyframes */
+@keyframes bounce-in {
+  0% { transform: translateY(-24px) scaleY(0.98); opacity: 0; }
+  60% { transform: translateY(8px) scaleY(1.02); opacity: 1; }
+  100% { transform: translateY(0) scaleY(1); opacity: 1; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
 nav a {
@@ -74,7 +97,8 @@ nav .active {
   padding: 10px 14px;
   font-size: 16px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid #ffffff;
+  color:#99cf11;
 }
 
 /* PRODUCT GRID */
