@@ -168,6 +168,22 @@ nav .active {
   transform: translateY(-3px);
   color: #ffb400;
 }
+/* price display when discount exists */
+.price .orig {
+  text-decoration: line-through;
+  color: #777;
+  margin-right: 8px;
+}
+.price .disc {
+  color: #1a4d2e;
+  font-weight: bold;
+}
+
+/* rating active star */
+.rating span.active {
+  transform: translateY(-3px);
+  color: #ffb400;
+}
 h2 {
   font-size: 28px;
   text-align: center;
@@ -359,6 +375,6 @@ ul{
 
 .rating span.active {
   color: gold;
-  
+
 }
 
