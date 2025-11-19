@@ -47,12 +47,22 @@ buttons.forEach(button => {
   });
 });
 // Star rating functionality
-document.querySelectorAll('.rating span').forEach(star => {
-  star.addEventListener('click', function() {
-    let rating = this.getAttribute("data-star");
-    alert("You rated: " + rating + " stars");
+document.querySelectorAll('.rating').forEach(ratingBox => {
+  const stars = ratingBox.querySelectorAll('span');
+
+  stars.forEach((star, index) => {
+    star.addEventListener('click', () => {
+      // remove active from all
+      stars.forEach(s => s.classList.remove('active'));
+
+      // add active to clicked and all before it
+      for (let i = 0; i <= index; i++) {
+        stars[i].classList.add('active');
+      }
+    });
   });
 });
+
 
 // Optional: Add category filter
 const categoryFilter = document.getElementById('categoryFilter');
