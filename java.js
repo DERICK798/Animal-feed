@@ -46,6 +46,13 @@ buttons.forEach(button => {
     alert(`${name} added to cart!`);
   });
 });
+// Star rating functionality
+document.querySelectorAll('.rating span').forEach(star => {
+  star.addEventListener('click', function() {
+    let rating = this.getAttribute("data-star");
+    alert("You rated: " + rating + " stars");
+  });
+});
 
 // Optional: Add category filter
 const categoryFilter = document.getElementById('categoryFilter');

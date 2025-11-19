@@ -152,6 +152,22 @@ nav .active {
   font-weight: bold;
   color: #191b1c;
 }
+/* Rating stars */
+.rating {
+  display: flex;
+  gap: 6px;
+  color: #ffdd57; /* gold */
+  font-size: 18px;
+  align-items: center;
+}
+.rating span {
+  cursor: pointer;
+  transition: transform .12s ease, color .12s ease;
+}
+.rating span:hover {
+  transform: translateY(-3px);
+  color: #ffb400;
+}
 h2 {
   font-size: 28px;
   text-align: center;
@@ -326,4 +342,15 @@ ul{
 
 .place-order-btn:hover {
   background: #0f3820;
+}
+
+/* RATING STARS */
+.rating span {
+  font-size: 30px;
+  color: #ccc;
+  cursor: pointer;
+}
+.rating span:hover,
+.rating span:hover ~ span {
+  color: #f4b400;
 }
