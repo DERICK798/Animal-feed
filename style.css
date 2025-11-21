@@ -111,7 +111,7 @@ nav .active {
 }
 
 .product-card {
-  background: rgb(199, 222, 184);
+  background: rgb(222, 226, 219);
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(21, 60, 149, 0.1);
@@ -135,6 +135,7 @@ nav .active {
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
+  aspect-ratio: 1 / 1;
 }
 
 .image-container img {
