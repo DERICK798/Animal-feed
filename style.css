@@ -248,7 +248,7 @@ footer {
   background: #1a4d2e;
   color: #fff;
   margin-top: 40px;
-  position:inherit;
+  position: relative;
   z-index: 100;
   clear: both;
   border-top: 2px solid #ffdd57;
