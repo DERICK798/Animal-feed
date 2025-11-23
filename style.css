@@ -191,6 +191,9 @@ nav .active {
   font-weight: bold;
 }
 
+p-class{
+  color:green;
+}
 .discount-badge {
   background: #e74c3c; /* red */
   color: #fff;
