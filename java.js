@@ -125,6 +125,48 @@ function renderDiscounts() {
 // Run once on page load
 renderDiscounts();
 
+// Create hover previews for product images: small thumbnail strip that appears
+// when hovering a product card. Clicking a thumbnail will set the card's main
+// image (the first image in `.image-container`) to the clicked image.
+function createImagePreviews() {
+  products.forEach(product => {
+    const imgContainer = product.querySelector('.image-container');
+    if (!imgContainer) return;
+
+    const imgs = Array.from(imgContainer.querySelectorAll('img'));
+    if (imgs.length === 0) return;
+
+    // Build preview strip
+    const previews = document.createElement('div');
+    previews.className = 'image-previews';
+
+    imgs.forEach((img) => {
+      const thumb = document.createElement('img');
+      thumb.className = 'preview-thumb';
+      // prefer src attribute; if empty, fall back safely
+      thumb.src = img.src && img.src.trim() !== '' ? img.src : img.getAttribute('data-src') || '';
+      thumb.alt = img.alt || 'preview';
+
+      // clicking thumbnail swaps main image
+      thumb.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        const mainImg = imgContainer.querySelector('img');
+        if (mainImg && thumb.src) {
+          mainImg.src = thumb.src;
+        }
+      });
+
+      previews.appendChild(thumb);
+    });
+
+    // Append previews after the image container
+    imgContainer.parentNode.insertBefore(previews, imgContainer.nextSibling);
+  });
+}
+
+// initialize image previews
+createImagePreviews();
+
 if (categoryFilter && searchInput) {
   function filterProducts() {
     const category = categoryFilter.value;
@@ -145,6 +187,25 @@ if (categoryFilter && searchInput) {
   categoryFilter.addEventListener('change', filterProducts);
   searchInput.addEventListener('keyup', filterProducts);
 }
+
+const toggle = document.getElementById("themeToggle");
+const body = document.body;
+
+// Load saved mode
+if (localStorage.getItem("theme") === "dark") {
+  body.classList.add("dark-mode");
+}
+
+toggle.addEventListener("click", () => {
+  body.classList.toggle("dark-mode");
+
+  // Save user preference
+  if (body.classList.contains("dark-mode")) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
+  }
+});
 
 // If on cart page, display cart items
 if (document.getElementById('cart-items')) {
@@ -196,3 +257,4 @@ if (document.getElementById('cart-items')) {
 }
 
 }
+
