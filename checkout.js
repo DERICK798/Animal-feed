@@ -1,44 +1,73 @@
-// Get cart from localStorage
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-document.getElementById("checkout-form").addEventListener("submit", function(e){
-    e.preventDefault();
-
-    let phone = document.getElementById("phone").value.trim();
-    let location = document.getElementById("location").value.trim();
-    let payment = document.getElementById("payment").value.trim();
-
-    // Validate all fields are filled
-    if (!phone || !location || !payment) {
-        alert("Please fill all fields!");
+// Safe checkout handling: wait for DOM, parse cart safely and re-read cart at submit
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('checkout-form');
+    if (!form) {
+        console.warn('checkout.js: #checkout-form not found on this page');
         return;
     }
 
-    // Validate cart is not empty
-    if (cart.length === 0) {
-        alert("Your cart is empty! Add items before checkout.");
-        return;
+    function readCart() {
+        try {
+            const raw = localStorage.getItem('cart');
+            if (!raw) return [];
+            const parsed = JSON.parse(raw);
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (err) {
+            console.error('checkout.js: failed to parse cart from localStorage', err);
+            return [];
+        }
     }
 
-    // Calculate total
-    let total = cart.reduce((sum, item) => sum + item.price, 0);
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
 
-    // Create order details with cart info
-    let details = {
-        phone,
-        location,
-        payment,
-        items: cart,
-        total: total,
-        date: new Date().toLocaleString()
-    };
+        const phone = (document.getElementById('phone')?.value || '').trim();
+        const location = (document.getElementById('location')?.value || '').trim();
+        const payment = (document.getElementById('payment')?.value || '').trim();
 
-    localStorage.setItem("orderDetails", JSON.stringify(details));
+        // Validate all fields are filled
+        if (!phone || !location || !payment) {
+            alert('Please fill all fields!');
+            return;
+        }
 
-    alert("Order Confirmed! We will contact you.");
+        // Re-read cart at submit time so we have latest items
+        const cart = readCart();
 
-    // Clear cart after successful order
-    localStorage.removeItem("cart");
+        // Validate cart is not empty
+        if (!cart || cart.length === 0) {
+            alert('Your cart is empty! Add items before checkout.');
+            return;
+        }
 
-    window.location.href = "index.html";
+        // Calculate total (coerce price to number)
+        const total = cart.reduce((sum, item) => {
+            const p = Number(item.price) || 0;
+            return sum + p;
+        }, 0);
+
+        // Create order details with cart info
+        const details = {
+            phone,
+            location,
+            payment,
+            items: cart,
+            total,
+            date: new Date().toLocaleString()
+        };
+
+        try {
+            localStorage.setItem('orderDetails', JSON.stringify(details));
+        } catch (err) {
+            console.error('checkout.js: failed to save orderDetails', err);
+        }
+
+        alert('Order Confirmed! We will contact you.');
+
+        // Clear cart after successful order
+        localStorage.removeItem('cart');
+
+        // Redirect to homepage
+        window.location.href = 'index.html';
+    });
 });
