@@ -170,13 +170,19 @@ createImagePreviews();
 if (categoryFilter && searchInput) {
   function filterProducts() {
     const category = categoryFilter.value;
-    const search = searchInput.value.toLowerCase();
+    const search = searchInput.value.trim().toLowerCase();
 
     products.forEach(product => {
-      const prodCategory = product.getAttribute('data-category').toLowerCase();
-      const prodName = product.querySelector('h3').textContent.toLowerCase();
+      const prodCategory = (product.getAttribute('data-category') || '').toLowerCase();
+      const prodName = (product.querySelector('h3')?.textContent || '').toLowerCase();
 
-      if ((category === 'all' || prodCategory.includes(category)) && prodName.includes(search)) {
+      // Category selector must match (or be 'all')
+      const matchesCategoryFilter = (category === 'all') || prodCategory === category || prodCategory.includes(category);
+
+      // Search input matches either name OR category (or empty search matches everything)
+      const matchesSearch = !search || prodName.includes(search) || prodCategory.includes(search);
+
+      if (matchesCategoryFilter && matchesSearch) {
         product.style.display = 'block';
       } else {
         product.style.display = 'none';
