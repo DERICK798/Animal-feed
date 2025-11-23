@@ -62,9 +62,11 @@ header .logo span {
 }
 
 nav a {
-  color: white;
-  text-decoration: none;
+  color: rgb(12, 231, 56);
+  text-decoration:none;
   margin: 0 12px;
+  font-size: larger;
+  border: 6px;
 }
 
 nav .active {
@@ -103,6 +105,23 @@ nav .active {
   top: 70px;
   z-index: 999;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+section {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: sectionFade 0.8s ease forwards;
+}
+
+section:nth-of-type(1) { animation-delay: .2s; }
+section:nth-of-type(2) { animation-delay: .4s; }
+section:nth-of-type(3) { animation-delay: .6s; }
+
+@keyframes sectionFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .product-filter select,
@@ -191,9 +210,6 @@ nav .active {
   font-weight: bold;
 }
 
-p-class{
-  color:green;
-}
 .discount-badge {
   background: #e74c3c; /* red */
   color: #fff;
@@ -263,11 +279,11 @@ p{
 
 }
 ul{
-  color:white;
+  color:rgb(32, 8, 218);
 }
 
 .btn-shop{
-  color:#c61423;
+  color:#250fee;
 }
 
 .order-page {
