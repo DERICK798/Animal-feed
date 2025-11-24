@@ -919,17 +919,18 @@ ul{
 
 /* LOGIN PAGE STYLES */
 .login-container {
-  background-color: white;
+  background-color: rgb(235, 14, 102);
   padding: 40px;
   margin-top: 100px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  width: 50%;
   max-width: 400px;
 }
 
 .form{
   align-items: center;
+  display: flex;
 }
 
 
@@ -953,6 +954,7 @@ ul{
 
 .login-container input {
   width: 100%;
+  display:flex;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
