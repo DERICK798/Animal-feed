@@ -439,9 +439,9 @@ footer {
 }
 
 p{
-  font-display:inherit;
-  color:tomato;
-
+  font-display: inherit;
+  color: tomato;
+  text-decoration: none;
 }
 ul{
   color:rgb(32, 8, 218);
@@ -915,5 +915,73 @@ ul{
     flex-direction: column;
     gap: 8px;
   }
+}
+
+/* LOGIN PAGE STYLES */
+.login-container {
+  background-color: white;
+  padding: 40px;
+  margin-top: 100px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.form{
+  align-items: center;
+}
+
+
+.dark-mode .login-container {
+  background-color: #242424;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--text);
+}
+
+.login-container label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text);
+  font-weight: bold;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  color: #000;
+}
+
+.dark-mode .login-container input {
+  background-image: url(https://tse4.mm.bing.net/th/id/OIP.-LxLfbpz-U0VHYGez0OrDwHaDt?rs=1&pid=ImgDetMain&o=7&rm=3);
+  color: #fff;
+  border-color: #555;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 12px;
+  background-color: #1a4d2e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+  background-color: #0d2818;
 }
 
