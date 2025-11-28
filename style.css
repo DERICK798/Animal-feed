@@ -161,7 +161,7 @@ header .logo span {
   margin-bottom: 20px;
   border-left: 5px solid #09de3e;
   padding: 20px 10px 10px;
-  
+
   display: inline-block; /* allow transform animations */
   /* page-load bounce (runs once) */
   animation: bounce-in 900ms cubic-bezier(.22,.8,.25,1) 1;
@@ -205,18 +205,31 @@ nav .active {
   cursor: pointer;
 }
 
-.quantity-control{
+.quantity-container{
   display:flex;
   align-items:center;
+  gap:7px;
 }
-.quantity-input{
-  width:0px;
-  height:30px;
+.qty-input{
+  width:60px;
+  padding:5px;
   text-align:center;
-  border:1px solid blue;
-  border-radius:5px;
-  margin:inherit;
 }
+.cancel-btn{
+  padding:5px 10px;
+  background: red;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+.cancel-btn:hover{background-color: #09de3e;}
+ .qty-btn{
+  padding:5px 10px;
+  background: #ffb400;
+  color:white;
+  border:none;
+  cursor:pointer;
+ }
 .decrement,.increment{
   width:30px;
   height:30px;

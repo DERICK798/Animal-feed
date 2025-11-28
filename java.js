@@ -14,6 +14,46 @@ function updateCartCount() {
     }
 }
 
+// Product-level quick quantity/total helpers — only initialize when relevant elements exist
+const priceElement = document.querySelector(".price");
+const qtyInput = document.querySelector(".qty-input");
+const minusBtn = document.querySelector(".minus");
+const plusBtn = document.querySelector(".plus");
+const totalPrice = document.querySelector(".total-price");
+
+let pricePerKg = 0;
+if (priceElement) {
+  const raw = priceElement.getAttribute("data-price");
+  pricePerKg = parseInt(raw, 10) || 0;
+}
+
+function updateTotal() {
+  if (!qtyInput || !totalPrice) return;
+  let qty = parseInt(qtyInput.value, 10) || 0;
+  totalPrice.textContent = qty * pricePerKg;
+}
+
+// Attach handlers only if controls exist on the page
+if (plusBtn && minusBtn && qtyInput) {
+  // Increase quantity
+  plusBtn.addEventListener("click", () => {
+    qtyInput.value = (parseInt(qtyInput.value, 10) || 0) + 1;
+    updateTotal();
+  });
+
+  // Decrease quantity
+  minusBtn.addEventListener("click", () => {
+    const v = parseInt(qtyInput.value, 10) || 1;
+    if (v > 1) {
+      qtyInput.value = v - 1;
+      updateTotal();
+    }
+  });
+
+  // Manual input
+  qtyInput.addEventListener("input", updateTotal);
+}
+
 // Update cart count on page load
 updateCartCount();
 
@@ -63,10 +103,10 @@ buttons.forEach(button => {
       }
     }
 
-    // Determine quantity (look for a .quantity input inside the same product card)
+    // Determine quantity (look for a qty-input inside the same product card)
     let quantity = 1;
     if (productCard) {
-      const qtyInput = productCard.querySelector('input.quantity');
+      const qtyInput = productCard.querySelector('input.qty-input');
       if (qtyInput) {
         const qv = parseInt(qtyInput.value, 10);
         if (!Number.isNaN(qv) && qv > 0) quantity = qv;
@@ -147,10 +187,10 @@ function renderDiscounts() {
 renderDiscounts();
 
 // Quantity increment / decrement handlers for product cards
-document.querySelectorAll('.quantity-control').forEach(ctrl => {
-  const dec = ctrl.querySelector('.decrement');
-  const inc = ctrl.querySelector('.increment');
-  const input = ctrl.querySelector('input.quantity');
+document.querySelectorAll('.quantity-container').forEach(ctrl => {
+  const dec = ctrl.querySelector('.minus');
+  const inc = ctrl.querySelector('.plus');
+  const input = ctrl.querySelector('input.qty-input');
   if (!input) return;
 
   const clamp = () => {
@@ -267,10 +307,21 @@ toggle.addEventListener("click", () => {
 
 // If on cart page, display cart items
 if (document.getElementById('cart-items')) {
+  const cartItemsContainer = document.getElementById('cart-items');
+  const totalPriceEl = document.getElementById('total-price');
+  const checkoutBtn = document.querySelector('.checkout-btn');
 
-    const cartItemsContainer = document.getElementById('cart-items');
-    const totalPriceEl = document.getElementById('total-price');
-    const checkoutBtn = document.querySelector('.checkout-btn');
+  try {
+    // Defensive: ensure `cart` is an array (handle case where it's a JSON string)
+    if (!Array.isArray(cart) && typeof cart === 'string') {
+      try { cart = JSON.parse(cart); } catch (e) { console.warn('Could not parse cart string', e); cart = []; }
+    }
+
+    // Update debug panel if present
+    const debugPre = document.getElementById('cart-debug');
+    if (debugPre) debugPre.textContent = cart && cart.length ? JSON.stringify(cart, null, 2) : '(no cart data)';
+
+    console.log('Cart data:', cart);
 
     let total = 0;
 
@@ -278,15 +329,17 @@ if (document.getElementById('cart-items')) {
     cartItemsContainer.innerHTML = "";
 
     // Check if cart is empty
-    if (cart.length === 0) {
+    if (!cart || cart.length === 0) {
       cartItemsContainer.innerHTML = "<p>Your cart is empty</p>";
     } else {
       // Loop through cart and display items (show qty, unit price and subtotal)
-      cart.forEach(item => {
-        const qty = parseInt(item.quantity, 10) || 1;
-        const unit = parseFloat(item.unitPrice ?? item.price) || 0;
+      cart.forEach((item, index) => {
+        const qty = Number.parseInt(item.quantity, 10) || 1;
+        const unit = Number.parseFloat(item.unitPrice ?? item.price) || 0;
         const subtotal = unit * qty;
         total += subtotal;
+
+        console.log(`Item ${index}:`, item, `qty: ${qty}, unit: ${unit}, subtotal: ${subtotal}`);
 
         const div = document.createElement('div');
         div.classList.add('cart-item');
@@ -294,30 +347,36 @@ if (document.getElementById('cart-items')) {
         div.innerHTML = `
           <span class="cart-name">${item.name}</span>
           <span class="cart-qty">x${qty}</span>
-          <span class="cart-unit">Ksh ${unit.toLocaleString()}</span>
-          <span class="cart-sub">Ksh ${subtotal.toLocaleString()}</span>
+          <span class="cart-unit">Ksh ${Math.round(unit).toLocaleString()}</span>
+          <span class="cart-sub">Ksh ${Math.round(subtotal).toLocaleString()}</span>
         `;
 
         cartItemsContainer.appendChild(div);
       });
     }
 
-    // Set total price (formatted)
-    totalPriceEl.textContent = 'Ksh ' + (total || 0).toLocaleString();
+    // Set total price (formatted) - HTML shows the Ksh label
+    if (totalPriceEl) totalPriceEl.textContent = Math.round(total || 0).toLocaleString();
+    console.log('Total calculated:', total);
 
     // Checkout action - redirect to checkout form
-    checkoutBtn.addEventListener('click', () => {
-        if (cart.length === 0) {
-            alert("Cart yako iko empty!");
-            return;
+    if (checkoutBtn) {
+      checkoutBtn.addEventListener('click', () => {
+        if (!cart || cart.length === 0) {
+          alert("Cart yako iko empty!");
+          return;
         }
-        // Redirect user to checkout page to enter delivery details
         window.location.href = "checkout.html";
-    });
+      });
+    }
 
-    function goToCheckout() {
-    window.location.href = "checkout.html";
-}
+  } catch (err) {
+    console.error('Error rendering cart:', err);
+    cartItemsContainer.innerHTML = '<p style="color:crimson">Unable to load cart. Check console for details.</p>';
+    if (document.getElementById('cart-debug')) document.getElementById('cart-debug').textContent = String(err);
+  }
+
+  function goToCheckout() { window.location.href = "checkout.html"; }
 
 }
 

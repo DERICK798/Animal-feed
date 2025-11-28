@@ -52,7 +52,7 @@
     <img src="https://portal.mkulimabora.org/admin/product_photos_compressed/141.webp" alt="Chicken Mash 50kg">
   <img src="https://agroduka.com/images/product/KL025_5079-768x768.jpg">  
   </div>
-    <h3>Chicken Mash 50kg</h3>
+    <h3>Chicken Mash</h3>
     <div class="rating">
       <span data-star="5">★</span>
       <span data-star="4">★</span>
@@ -60,12 +60,15 @@
       <span data-star="2">★</span>
       <span data-star="1">★</span>
     </div>
-    <div class="quantity-control">
-      <button class="decrement"></button>
-      <input type="number"value="1" min="1" class="quantity input">
-      <button class="increment"></button>
+
+    <label>quantity (kg):</label>
+    <div class="quantity-container">
+      <button class="qty-btn minus"></button>
+      <input type="number" class="qty-input" value="1" min="1">
+      <button class="qty-btn plus"></button>
     </div>
-  <p class="price" data-price="1200" data-discount="">@1,200 ksh</p>
+
+  <p class="price" data-price="120" data-discount="">@1,200 ksh</p>
     <button class="btn-shop" data-name="Chicken Mash 50kg" data-price="1200">Add to Cart</button>
   </div>
 
@@ -82,14 +85,18 @@
       <span data-star="2">★</span>
       <span data-star="1">★</span>
     </div>
-     <div class="quantity-control">
-      <button class="decrement"></button>
-      <input type="number"value="1" min="1" class="quantity input">
-      <button class="increment"></button>
+     
+    <label>quantity (kg):</label>
+    <div class="quantity-container">
+      <button class="qty-btn minus"></button>
+      <input type="number" class="qty-input" value="1" min="1">
+      <button class="qty-btn plus"></button>
     </div>
+
   <p class="price" data-price="3500" data-discount="">@3,500 ksh</p>
     <button class="btn-shop" data-name="Cattle Cubes 50kg" data-price="3500">Add to Cart</button>
   </div>
+
 
   <div class="product-card" data-category="feeds">
     <div class="image-container">
@@ -104,11 +111,14 @@
       <span data-star="2">★</span>
       <span data-star="1">★</span>
     </div>
-     <div class="quantity-control">
-      <button class="decrement"></button>
-      <input type="number"value="1" min="1" class="quantity input">
-      <button class="increment"></button>
+    
+    <label>quantity (kg):</label>
+    <div class="quantity-container">
+      <button class="qty-btn minus"></button>
+      <input type="number" class="qty-input" value="1" min="1">
+      <button class="qty-btn plus"></button>
     </div>
+
     <p>Found in different minerals and manufacturers</p>
   <p class="price" data-price="1500" data-discount="">@1,500 ksh</p>
     <button class="btn-shop" data-name="Fish Feed 25kg" data-price="1500">Add to Cart</button>
@@ -127,11 +137,14 @@
       <span data-star="2">★</span>
       <span data-star="1">★</span>
     </div>
-     <div class="quantity-control">
-      <button class="decrement"></button>
-      <input type="number"value="1" min="1" class="quantity input">
-      <button class="increment"></button>
+     
+    <label>quantity (kg):</label>
+    <div class="quantity-container">
+      <button class="qty-btn minus"></button>
+      <input type="number" class="qty-input" value="1" min="1">
+      <button class="qty-btn plus"></button>
     </div>
+
   <p class="price" data-price="2800" data-discount="">@2,800 ksh</p>
     <button class="btn-shop" data-name="Goat Pellets 50kg" data-price="2800">Add to Cart</button>
   </div>
@@ -153,12 +166,16 @@
       <span data-star="2">★</span>
       <span data-star="1">★</span>
     </div>
-     <div class="quantity-control">
-      <button class="decrement"></button>
-      <input type="number"value="1" min="1" class="quantity input">
-      <button class="increment"></button>
-    </div>
+     
     <p>Effective deworming for cattle and livestock</p>
+
+    <label>quantity (kg):</label>
+    <div class="quantity-container">
+      <button class="qty-btn minus"></button>
+      <input type="number" class="qty-input" value="1" min="1">
+      <button class="qty-btn plus"></button>
+    </div>
+
     <p class="price" data-price="450" data-discount="">@450 ksh</p>
     <button class="btn-shop" data-name="Dewormer for Cattle 100ml" data-price="450">Add to Cart</button>
   </div>
@@ -175,12 +192,16 @@
       <span data-star="2">★</span>
       <span data-star="1">★</span>
     </div>
-     <div class="quantity-control">
-      <button class="decrement"></button>
-      <input type="number"value="1" min="1" class="quantity input">
-      <button class="increment"></button>
-    </div>
+     
     <p>Broad-spectrum antibiotic for animals</p>
+
+    <label>quantity (kg):</label>
+    <div class="quantity-container">
+      <button class="qty-btn minus"></button>
+      <input type="number" class="qty-input" value="1" min="1">
+      <button class="qty-btn plus"></button>
+    </div>
+
     <p class="price" data-price="600" data-discount="">@600 ksh</p>
     <button class="btn-shop" data-name="Antibiotic Injection 50ml" data-price="600">Add to Cart</button>
   </div>
@@ -198,6 +219,14 @@
       <span data-star="1">★</span>
     </div>
     <p>Essential vitamins for animal health</p>
+
+    <label>quantity (kg):</label>
+    <div class="quantity-container">
+      <button class="qty-btn minus"></button>
+      <input type="number" class="qty-input" value="1" min="1">
+      <button class="qty-btn plus"></button>
+    </div>
+
     <p class="price" data-price="350" data-discount="20">@350 ksh</p>
     <button class="btn-shop" data-name="Vitamin Supplement 200ml" data-price="350">Add to Cart</button>
   </div>
@@ -215,6 +244,14 @@
       <span data-star="1">★</span>
     </div>
     <p>Effective parasite control for animals</p>
+
+    <label>quantity (kg):</label>
+    <div class="quantity-container">
+      <button class="qty-btn minus"></button>
+      <input type="number" class="qty-input" value="1" min="1">
+      <button class="qty-btn plus"></button>
+    </div>
+
     <p class="price" data-price="500" data-discount="">@500 ksh</p>
     <button class="btn-shop" data-name="Flea & Tick Treatment 100ml" data-price="500">Add to Cart</button>
   </div>
@@ -232,6 +269,14 @@
       <span data-star="1">★</span>
     </div>
     <p>Safe and effective pain management</p>
+
+    <label>quantity (kg):</label>
+    <div class="quantity-container">
+      <button class="qty-btn minus"></button>
+      <input type="number" class="qty-input" value="1" min="1">
+      <button class="qty-btn plus"></button>
+    </div>
+
     <p class="price" data-price="550" data-discount="">@550 ksh</p>
     <button class="btn-shop" data-name="Pain Relief for Animals 100ml" data-price="550">Add to Cart</button>
   </div>
@@ -254,6 +299,14 @@
       <span data-star="1">★</span>
     </div>
     <p>Effective pest control solution</p>
+
+    <label>quantity (kg):</label>
+    <div class="quantity-container">
+      <button class="qty-btn minus"></button>
+      <input type="number" class="qty-input" value="1" min="1">
+      <button class="qty-btn plus"></button>
+    </div>
+
     <p class="price" data-price="550" data-discount="">@550 ksh</p>
     <button class="btn-shop" data-name="Savvin - Insecticide 500ml" data-price="550">Add to Cart</button>
   </div>
@@ -272,6 +325,14 @@
       <span data-star="1">★</span>
     </div>
     <p>Professional strength insecticide</p>
+
+    <label>quantity (kg):</label>
+    <div class="quantity-container">
+      <button class="qty-btn minus"></button>
+      <input type="number" class="qty-input" value="1" min="1">
+      <button class="qty-btn plus"></button>
+    </div>
+
     <p class="price" data-price="650" data-discount="">@650 ksh</p>
     <button class="btn-shop" data-name="DDT - Pesticide 1L" data-price="650">Add to Cart</button>
   </div>
@@ -289,6 +350,14 @@
       <span data-star="1">★</span>
     </div>
     <p>Broad-spectrum insecticide. Use with protective equipment and follow label directions.</p>
+
+    <label>quantity (kg):</label>
+    <div class="quantity-container">
+      <button class="qty-btn minus"></button>
+      <input type="number" class="qty-input" value="1" min="1">
+      <button class="qty-btn plus"></button>
+    </div>
+
     <p class="price" data-price="300" data-discount="">@300 ksh</p>
     <button class="btn-shop" data-name="Diazinon 500ml" data-price="300">Add to Cart</button>
   </div>
@@ -312,6 +381,14 @@
       <span data-star="1">★</span>
     </div>
     <p>Effective digging and hoeing tool</p>
+
+    <label>quantity (kg):</label>
+    <div class="quantity-container">
+      <button class="qty-btn minus"></button>
+      <input type="number" class="qty-input" value="1" min="1">
+      <button class="qty-btn plus"></button>
+    </div>
+
     <p class="price" data-price="800" data-discount="">@800 ksh</p>
     <button class="btn-shop" data-name="Hand Hoe" data-price="800">Add to Cart</button>
   </div>
@@ -330,6 +407,14 @@
       <span data-star="1">★</span>
     </div>
     <p>Durable garden rake for soil preparation</p>
+
+    <label>quantity (kg):</label>
+    <div class="quantity-container">
+      <button class="qty-btn minus"></button>
+      <input type="number" class="qty-input" value="1" min="1">
+      <button class="qty-btn plus"></button>
+    </div>
+
     <p class="price" data-price="1200" data-discount="25">@1,200 ksh</p>
     <button class="btn-shop" data-name="Garden Rake" data-price="1200">Add to Cart</button>
   </div>
