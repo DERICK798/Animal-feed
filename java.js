@@ -380,3 +380,14 @@ if (document.getElementById('cart-items')) {
 
 }
 
+  // Cancel from cart with confirmation
+  function cancelFromCart() {
+    try {
+      const ok = confirm('Are you sure you want to cancel and go back to home? Your cart will remain saved.');
+      if (ok) location.href = 'index.html';
+    } catch (e) {
+      // fallback
+      location.href = 'index.html';
+    }
+  }
+
