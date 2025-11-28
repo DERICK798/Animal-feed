@@ -159,8 +159,9 @@ header .logo span {
   color:deeppink;
   font-size: 28px;
   margin-bottom: 20px;
-  border-left: 5px solid #1ea81e;
-  padding-left: 10px;
+  border-left: 5px solid #09de3e;
+  padding: 20px 10px 10px;
+  
   display: inline-block; /* allow transform animations */
   /* page-load bounce (runs once) */
   animation: bounce-in 900ms cubic-bezier(.22,.8,.25,1) 1;
@@ -202,6 +203,31 @@ nav .active {
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.quantity-control{
+  display:flex;
+  align-items:center;
+}
+.quantity-input{
+  width:0px;
+  height:30px;
+  text-align:center;
+  border:1px solid blue;
+  border-radius:5px;
+  margin:inherit;
+}
+.decrement,.increment{
+  width:30px;
+  height:30px;
+  border:none;
+  border-radius:5px;
+  background-color:#4CAF50;
+  color:#FFF;
+  cursor:pointer;
+}
+.decrement:hover,.increment:hover{
+  background-color:yellow;
 }
 
 /* HERO */

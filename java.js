@@ -5,7 +5,12 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 function updateCartCount() {
     const cartCountEl = document.getElementById('cart-count');
     if (cartCountEl) {
-        cartCountEl.textContent = cart.length;
+    // Count total quantity if items store a quantity, otherwise fall back to number of items
+    const totalQty = cart.reduce((sum, it) => {
+      const q = parseInt(it.quantity, 10);
+      return sum + (Number.isFinite(q) && q > 0 ? q : 1);
+    }, 0);
+    cartCountEl.textContent = totalQty;
     }
 }
 
@@ -58,8 +63,24 @@ buttons.forEach(button => {
       }
     }
 
-    // Add product to cart using the final price
-    cart.push({ name, price: finalPrice });
+    // Determine quantity (look for a .quantity input inside the same product card)
+    let quantity = 1;
+    if (productCard) {
+      const qtyInput = productCard.querySelector('input.quantity');
+      if (qtyInput) {
+        const qv = parseInt(qtyInput.value, 10);
+        if (!Number.isNaN(qv) && qv > 0) quantity = qv;
+      }
+    }
+
+    // Store unit price and quantity. If same product exists, increase its quantity instead of duplicating
+    const unitPrice = finalPrice;
+    const existing = cart.find(it => it.name === name);
+    if (existing) {
+      existing.quantity = (parseInt(existing.quantity, 10) || 1) + quantity;
+    } else {
+      cart.push({ name, unitPrice, quantity });
+    }
 
     // Save to localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -68,7 +89,7 @@ buttons.forEach(button => {
     updateCartCount();
 
     // Notify user
-    alert(`${name} added to cart!`);
+    alert(`${name} (x${quantity}) added to cart!`);
   });
 });
 // Star rating functionality
@@ -124,6 +145,37 @@ function renderDiscounts() {
 
 // Run once on page load
 renderDiscounts();
+
+// Quantity increment / decrement handlers for product cards
+document.querySelectorAll('.quantity-control').forEach(ctrl => {
+  const dec = ctrl.querySelector('.decrement');
+  const inc = ctrl.querySelector('.increment');
+  const input = ctrl.querySelector('input.quantity');
+  if (!input) return;
+
+  const clamp = () => {
+    let v = parseInt(input.value, 10);
+    if (Number.isNaN(v) || v < 1) v = 1;
+    input.value = v;
+  };
+
+  dec && dec.addEventListener('click', (e) => {
+    e.preventDefault();
+    let v = parseInt(input.value, 10) || 1;
+    v = Math.max(1, v - 1);
+    input.value = v;
+  });
+
+  inc && inc.addEventListener('click', (e) => {
+    e.preventDefault();
+    let v = parseInt(input.value, 10) || 1;
+    v = v + 1;
+    input.value = v;
+  });
+
+  // Ensure on manual change the value is valid
+  input.addEventListener('change', clamp);
+});
 
 // Create hover previews for product images: small thumbnail strip that appears
 // when hovering a product card. Clicking a thumbnail will set the card's main
@@ -227,26 +279,31 @@ if (document.getElementById('cart-items')) {
 
     // Check if cart is empty
     if (cart.length === 0) {
-        cartItemsContainer.innerHTML = "<p>Your cart is empty</p>";
+      cartItemsContainer.innerHTML = "<p>Your cart is empty</p>";
     } else {
-        // Loop through cart and display items
-        cart.forEach(item => {
-            total += item.price;
+      // Loop through cart and display items (show qty, unit price and subtotal)
+      cart.forEach(item => {
+        const qty = parseInt(item.quantity, 10) || 1;
+        const unit = parseFloat(item.unitPrice ?? item.price) || 0;
+        const subtotal = unit * qty;
+        total += subtotal;
 
-            const div = document.createElement('div');
-            div.classList.add('cart-item');
+        const div = document.createElement('div');
+        div.classList.add('cart-item');
 
-            div.innerHTML = `
-                <span>${item.name}</span>
-                <span>Ksh ${item.price}</span>
-            `;
+        div.innerHTML = `
+          <span class="cart-name">${item.name}</span>
+          <span class="cart-qty">x${qty}</span>
+          <span class="cart-unit">Ksh ${unit.toLocaleString()}</span>
+          <span class="cart-sub">Ksh ${subtotal.toLocaleString()}</span>
+        `;
 
-            cartItemsContainer.appendChild(div);
-        });
+        cartItemsContainer.appendChild(div);
+      });
     }
 
-    // Set total price
-    totalPriceEl.textContent = total;
+    // Set total price (formatted)
+    totalPriceEl.textContent = 'Ksh ' + (total || 0).toLocaleString();
 
     // Checkout action - redirect to checkout form
     checkoutBtn.addEventListener('click', () => {
