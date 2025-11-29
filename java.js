@@ -193,28 +193,65 @@ document.querySelectorAll('.quantity-container').forEach(ctrl => {
   const input = ctrl.querySelector('input.qty-input');
   if (!input) return;
 
+  // Determine step and min (may be adjusted later per product category)
+  const getStep = () => { const s = parseFloat(input.getAttribute('step')); return (Number.isFinite(s) && s > 0) ? s : 1; };
+  const getMin = () => { const m = parseFloat(input.getAttribute('min')); return (Number.isFinite(m) && m > 0) ? m : 1; };
+
   const clamp = () => {
-    let v = parseInt(input.value, 10);
-    if (Number.isNaN(v) || v < 1) v = 1;
-    input.value = v;
+    let v = parseFloat(input.value);
+    const min = getMin();
+    if (!Number.isFinite(v) || v < min) v = min;
+    const step = getStep();
+    if (Number.isInteger(step)) {
+      input.value = Math.round(v);
+    } else {
+      input.value = parseFloat(v.toFixed(2));
+    }
   };
 
   dec && dec.addEventListener('click', (e) => {
     e.preventDefault();
-    let v = parseInt(input.value, 10) || 1;
-    v = Math.max(1, v - 1);
-    input.value = v;
+    let v = parseFloat(input.value) || getMin();
+    const step = getStep();
+    const min = getMin();
+    v = Math.max(min, +(v - step));
+    if (Number.isInteger(step)) input.value = Math.round(v); else input.value = parseFloat(v.toFixed(2));
   });
 
   inc && inc.addEventListener('click', (e) => {
     e.preventDefault();
-    let v = parseInt(input.value, 10) || 1;
-    v = v + 1;
-    input.value = v;
+    let v = parseFloat(input.value) || getMin();
+    const step = getStep();
+    v = +(v + step);
+    if (Number.isInteger(step)) input.value = Math.round(v); else input.value = parseFloat(v.toFixed(2));
   });
 
   // Ensure on manual change the value is valid
   input.addEventListener('change', clamp);
+});
+
+// Ensure feeds use kg (allow decimals) and others use integer steps
+document.querySelectorAll('.product-card').forEach(card => {
+  const qcont = card.querySelector('.quantity-container');
+  if (!qcont) return;
+  const input = qcont.querySelector('input.qty-input');
+  if (!input) return;
+  const isFeed = (card.getAttribute('data-category') || '').toLowerCase() === 'feeds';
+  // locate the label placed before the quantity-container
+  let lbl = qcont.previousElementSibling;
+  if (lbl && lbl.nodeType === 3) lbl = lbl.previousElementSibling; // skip text nodes
+  if (isFeed) {
+    input.setAttribute('step', '0.5');
+    input.setAttribute('min', '0.5');
+    if (lbl && lbl.tagName === 'LABEL') lbl.textContent = 'quantity (kg):';
+    // ensure value respects step
+    input.value = parseFloat(input.value) ? parseFloat(input.value).toFixed(2) : '0.50';
+  } else {
+    input.setAttribute('step', '1');
+    input.setAttribute('min', '1');
+    if (lbl && lbl.tagName === 'LABEL') lbl.textContent = 'quantity:';
+    input.value = Math.max(1, Math.round(parseFloat(input.value) || 1));
+  }
 });
 
 // Create hover previews for product images: small thumbnail strip that appears
