@@ -591,6 +591,18 @@ ul{
   background: #eee;
 }
 
+.remove-btn {
+  background: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  margin-left: 8px;
+}
+.remove-btn:hover { transform: translateY(-2px); opacity: 0.95; }
+
 .total-price {
   text-align: center;
   font-size: 18px;

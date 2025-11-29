@@ -360,41 +360,60 @@ if (document.getElementById('cart-items')) {
 
     console.log('Cart data:', cart);
 
-    let total = 0;
+    // Helper to render cart contents (call after changes)
+    function renderCart() {
+      let total = 0;
+      cartItemsContainer.innerHTML = "";
 
-    // Clear old content
-    cartItemsContainer.innerHTML = "";
+      if (!cart || cart.length === 0) {
+        cartItemsContainer.innerHTML = "<p>Your cart is empty</p>";
+        if (debugPre) debugPre.textContent = '(no cart data)';
+      } else {
+        cart.forEach((item, index) => {
+          const qty = Number.parseFloat(item.quantity) || 1;
+          const unit = Number.parseFloat(item.unitPrice ?? item.price) || 0;
+          const subtotal = unit * qty;
+          total += subtotal;
 
-    // Check if cart is empty
-    if (!cart || cart.length === 0) {
-      cartItemsContainer.innerHTML = "<p>Your cart is empty</p>";
-    } else {
-      // Loop through cart and display items (show qty, unit price and subtotal)
-      cart.forEach((item, index) => {
-        const qty = Number.parseInt(item.quantity, 10) || 1;
-        const unit = Number.parseFloat(item.unitPrice ?? item.price) || 0;
-        const subtotal = unit * qty;
-        total += subtotal;
+          console.log(`Item ${index}:`, item, `qty: ${qty}, unit: ${unit}, subtotal: ${subtotal}`);
 
-        console.log(`Item ${index}:`, item, `qty: ${qty}, unit: ${unit}, subtotal: ${subtotal}`);
+          const div = document.createElement('div');
+          div.classList.add('cart-item');
 
-        const div = document.createElement('div');
-        div.classList.add('cart-item');
+          div.innerHTML = `
+            <span class="cart-name">${item.name}</span>
+            <span class="cart-qty">x${qty}</span>
+            <span class="cart-unit">Ksh ${Math.round(unit).toLocaleString()}</span>
+            <span class="cart-sub">Ksh ${Math.round(subtotal).toLocaleString()}</span>
+            <button class="remove-btn" data-index="${index}" aria-label="Remove ${item.name}">Remove</button>
+          `;
 
-        div.innerHTML = `
-          <span class="cart-name">${item.name}</span>
-          <span class="cart-qty">x${qty}</span>
-          <span class="cart-unit">Ksh ${Math.round(unit).toLocaleString()}</span>
-          <span class="cart-sub">Ksh ${Math.round(subtotal).toLocaleString()}</span>
-        `;
+          cartItemsContainer.appendChild(div);
+        });
+      }
 
-        cartItemsContainer.appendChild(div);
-      });
+      if (totalPriceEl) totalPriceEl.textContent = Math.round(total || 0).toLocaleString();
+      // update debug panel
+      if (debugPre) debugPre.textContent = cart && cart.length ? JSON.stringify(cart, null, 2) : '(no cart data)';
     }
 
-    // Set total price (formatted) - HTML shows the Ksh label
-    if (totalPriceEl) totalPriceEl.textContent = Math.round(total || 0).toLocaleString();
-    console.log('Total calculated:', total);
+    // initial render
+    renderCart();
+
+    // Event delegation for remove buttons
+    cartItemsContainer.addEventListener('click', (ev) => {
+      const btn = ev.target.closest('.remove-btn');
+      if (!btn) return;
+      const idx = parseInt(btn.getAttribute('data-index'), 10);
+      if (Number.isNaN(idx) || idx < 0 || idx >= cart.length) return;
+
+      // Remove item
+      const removed = cart.splice(idx, 1)[0];
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+      renderCart();
+      alert(`${removed.name} removed from cart.`);
+    });
 
     // Checkout action - redirect to checkout form
     if (checkoutBtn) {
