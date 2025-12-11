@@ -71,3 +71,33 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'index.html';
     });
 });
+
+document.getElementById("checkout-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const phone = document.getElementById("phone").value.trim();
+    const location = document.getElementById("location").value.trim();
+    const payment = document.getElementById("payment").value;
+
+    if (!phone || !location || !payment) {
+        alert("Please fill in all fields");
+        return;
+    }
+
+    // Send to backend
+    const data = new FormData();
+    data.append("phone", phone);
+    data.append("location", location);
+    data.append("payment", payment);
+
+    const response = await fetch("api/create_order.php", {
+        method: "POST",
+        body: data
+    });
+
+    const result = await response.text();
+    alert(result);
+
+    // redirect to thank you page or cart
+    // window.location.href = "cart.html";
+});
