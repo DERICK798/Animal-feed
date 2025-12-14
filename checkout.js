@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         data.append("total", total);
         data.append("items", JSON.stringify(cart));
 
-        const response = await fetch("api/manage-order.php", {
+        const response = await fetch("api/manage-orders.php", {
             method: "POST",
             body: data
         });
