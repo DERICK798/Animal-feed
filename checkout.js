@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         data.append("total", total);
         data.append("items", JSON.stringify(cart));
 
-        const response = await fetch("api/create_order.php", {
+        const response = await fetch("api/manage-order.php", {
             method: "POST",
             body: data
         });
@@ -65,6 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = "index.html";
     });
 });
+/**
+ * @memberof window
+ * @function
+ */
 img.onerror = () => {
     img.src = "images/placeholder.jpg";
 };
