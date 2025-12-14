@@ -22,24 +22,20 @@
 
      <div class="checkout-container">
         <h2>Enter Delivery Details</h2>
+     <form id="checkout-form">
+  <input type="text" id="phone" name="phone" placeholder="Phone" required>
 
-<form action="manage-orders.php" method="post" id="checkout-form">
+  <input type="text" id="location" name="location" placeholder="Location" required>
 
-    <label>phone number</label>
-    <input type="text" id="phone" required>
+  <select id="payment" name="payment" required>
+    <option value="">Select payment</option>
+    <option value="Mpesa">M-Pesa</option>
+    <option value="Cash">Cash</option>
+  </select>
 
-    <label>Delivery Location</label>
-    <input type="text" id="location" placeholder="Nairobi, Chuka, Embu, Meru" required>
-
-    <label>Payment Method</label>
-    <select id="payment" required>
-        <option value="">select payment</option>
-        <option value="mpesa">Mpesa</option>
-        <option value="cash on delivery">Cash on Delivery</option>
-    </select>
-
-    <button type="submit" class="place-order-btn">Place Order</button>
+  <button type="submit">Place Order</button>
 </form>
+
 </div>
 <script src="java.js"></script>
 <script src="checkout.js"></script>

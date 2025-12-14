@@ -1,5 +1,7 @@
 <?php
-require_once '../includes/db.php';
+require_once __DIR__ . '/../admin-panel/config/db.php';
+
+
 
 // Get data from AJAX
 $phone = $_POST['phone'] ?? '';
