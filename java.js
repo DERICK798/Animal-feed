@@ -193,6 +193,37 @@ document.querySelectorAll('.quantity-container').forEach(ctrl => {
   const input = ctrl.querySelector('input.qty-input');
   if (!input) return;
 
+  const productsContainer = document.getElementById('product');
+
+fetch('http://localhost:3000/api/client/product')
+  .then(res => res.json())
+  .then(data => {
+    if (data.length === 0) {
+      productsContainer.innerHTML = '<p>No products available</p>';
+      return;
+    }
+
+    data.forEach(product => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+
+      card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>KES ${product.price}</p>
+        <button onclick="orderProduct(${product.id})">
+          Order
+        </button>
+      `;
+
+      productsContainer.appendChild(card);
+    });
+  })
+  .catch(err => {
+    console.error(err);
+    productsContainer.innerHTML = '<p>Error loading products</p>';
+  });
+
   // Determine step and min (may be adjusted later per product category)
   const getStep = () => { const s = parseFloat(input.getAttribute('step')); return (Number.isFinite(s) && s > 0) ? s : 1; };
   const getMin = () => { const m = parseFloat(input.getAttribute('min')); return (Number.isFinite(m) && m > 0) ? m : 1; };
