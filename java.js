@@ -203,6 +203,19 @@ fetch('http://localhost:3000/api/client/product')
       return;
     }
 
+products.forEach(p => {
+        const div = document.createElement('div');
+        div.innerHTML = `
+          <img src="${p.image}" width="150">
+          <h3>${p.name}</h3>
+          <p>KES ${p.price}</p>
+        `;
+        productsContainer.appendChild(div);
+      });
+    })
+    .catch(err => console.error(err));
+});
+
     data.forEach(product => {
       const card = document.createElement('div');
       card.className = 'product-card';
