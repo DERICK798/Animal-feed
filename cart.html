@@ -1,56 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cart AgroGrow</title>
-    <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
+<html>
+<head>
+  <title>My Cart</title>
+  <link rel="stylesheet" href="css/style.css"
+</head>
+<body>
     <header>
-      <div class="logo">Agro<span>Grow</span></div>
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="products.html">Products</a>
-        <a href="about.html">About</a>
-        <a href="cart.html" class="active">my order (<span id="cart-count">0</span>)</a>
-      </nav>
-      <div class="theme-toggle" id="themeToggle">
-        <span class="light">☀️</span>
-        <span class="Dark">🌙</span>
-      </div>
-      </header>
+    <div class="logo">Agro<span>Grow</span></div>
+    </header>
+<nav>
+    <a href="checkout.html" class="active">user Details</a>
+    <a href="products.html">Products</a>
+    <a href="cart.html">my order</a>
+  </nav>
+   <div class="theme-toggle" id="themeToggle">
+    <span class="light">☀️</span>
+    <span class="Dark">🌙</span>
+  </div>
+<h2>Your Cart</h2>
 
-      <div class="cart-container">
-        <h2>your placed order</h2>
-        <div id="cart-items" style="min-height: 50px; padding: 10px;">
-          <!-- Cart items will be loaded here by java.js -->
-          <p style="color: #999;">Loading cart...</p>
-        </div>
-        <p class="total-price">Total: Ksh <span id="total-price">0</span></p>
-        <div class="cart-actions">
-         <button class="checkout-btn" onclick="goToCheckout()">checkout</button>
-         <button class="cancel-btn" onclick="cancelFromCart()">cancel</button>
-        </div>
-      </div>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Qty</th>
+      <th>Total</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody id="cartBody"></tbody>
+</table>
 
-      <!-- Debug: show raw localStorage cart data 
-      <div style="width:90%;max-width:800px;margin:12px auto;font-size:13px;color:#444;">
-        <strong>Debug: raw cart storage</strong>
-        <pre id="cart-debug" style="background:#f7f7f7;border:1px solid #eee;padding:8px;white-space:pre-wrap;word-break:break-all;">(loading...)</pre>
-      </div>-->
+<h3>Total: KES <span id="grandTotal">0</span></h3>
 
-    <script>
-      // Populate debug panel with raw cart storage before loading main script
-      try {
-        const raw = localStorage.getItem('cart');
-        const pre = document.getElementById('cart-debug');
-        if (pre) pre.textContent = raw ? raw : '(no cart data in localStorage)';
-      } catch (e) {
-        console.warn('Could not read localStorage for debug:', e);
-      }
-    </script>
-    <script src="java.js"></script>
-    <footer>@ 2025 AgroGrow. right Reserved Developed and managed by Dero</footer>
-    </body>
+<a href="checkout.html">
+  <button>Proceed to Checkout</button>
+</a>
+<footer>Agroagrow Shop.com..All Rights and Data privacy considered.</footer>
+<script src="js/java.js"></script>
+</body>
 </html>
