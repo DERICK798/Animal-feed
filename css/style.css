@@ -12,9 +12,9 @@ input:focus, textarea:focus {
 }
 
 :root {
-  --bg: #f4e6e6;
+  --bg: #c2b6b6;
   --text: #c21731;
-  --card: #17a165;
+  --card: #caefa7;
   --header-bg: #1a4d2e;
 }
 
@@ -25,7 +25,7 @@ input:focus, textarea:focus {
 }
 
 .dark-mode {
-  --bg: #232121;
+  --bg: #efefef;
   --text: #0ffa3a;
   --card: #1c4d2c;
   --header-bg: #a3191b;
@@ -268,7 +268,7 @@ nav .active {
   text-align: center;
   padding: 50px;
   background: url('images/Products.jpeg') no-repeat center/cover;
-  color: rgb(45, 231, 147);
+  color: rgb(255, 255, 255);
 }
 
 .product-hero h1 {
@@ -384,10 +384,10 @@ section:nth-of-type(3) { animation-delay: .6s; }
   gap: 8px;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 20px;
   padding: 8px;
   background: rgba(0, 0, 0, 0.45);
-  border-radius: 8px;
+  border-radius: 10px;
   opacity: 0;
   max-height: 0;
   overflow: hidden;
